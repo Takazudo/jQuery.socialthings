@@ -1,0 +1,114 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title></title>
+<meta name="viewport" content="width=device-width">
+<style>
+#extraButtonTest {
+	border:2px solid black;
+	padding:10px;
+}
+	#extraButtonTestController {
+		padding:0 0 8px;
+	}
+</style>
+<script src="../libs/jquery/1.9.1/jquery.js"></script>
+<script src="../jquery.socialthings.js"></script>
+<script>
+
+$(function() {
+
+	// load fb first. All buttons on the page will be created.
+	// normally, this is enough.
+	$.socialthings.loadFacebookJS();
+
+	// extra button test.
+	// apply `initFacebookThings` to create buttons against dynamically added DOM.
+	var $extraButtons = $('#extraButtons');
+	$('#addExtra').click(function() {
+		var ids = [
+			'fblikeboxsrc',
+			'fblikebuttonsrc'
+		];
+		var index = Math.floor(Math.random() * 100) % 2; // 0 or 1
+		var src = $(document.getElementById(ids[index])).html(); // get src
+		var $newButton = $('<span></span>').html(src); // span wrap 
+		$extraButtons.append($newButton); // then add,
+		$newButton.initFacebookThings(); // and apply facebook button
+	});
+
+});
+
+</script>
+<script type="text/x-htmlsrc" id="fblikebuttonsrc">
+<div
+	class="fb-like"
+	data-href="http://example.com"
+	data-send="false"
+	data-layout="button_count"
+	data-width="118"
+	data-show-faces="true"
+>
+</script>
+<script type="text/x-htmlsrc" id="fblikeboxsrc">
+<div
+	class="fb-like-box"
+	data-href="https://www.facebook.com/jquerybook"
+	data-width="190"
+	data-height="243"
+	data-show-faces="true"
+	data-stream="false"
+	data-border-color="#ffffff"
+	data-header="true"
+>
+</script>
+</head>
+<body>
+
+<div class="liketest">
+	<div
+		class="fb-like"
+		data-href="http://example.com"
+		data-send="false"
+		data-layout="button_count"
+		data-width="118"
+		data-show-faces="true"
+	>
+</div>
+
+<div class="liketest">
+	<div
+		class="fb-like"
+		data-href="http://google.com"
+		data-send="false"
+		data-layout="button_count"
+		data-width="118"
+		data-show-faces="true"
+	>
+</div>
+
+<div class="liketest">
+	<div
+		class="fb-like-box"
+		data-href="https://www.facebook.com/jquerybook"
+		data-width="190"
+		data-height="243"
+		data-show-faces="true"
+		data-stream="false"
+		data-border-color="#ffffff"
+		data-header="true"
+	>
+</div>
+
+<div id="extraButtonTest">
+	<div id="extraButtonTestController">
+		<button id="addExtra">add extra button here</button>
+	</div>
+	<div id="extraButtons">
+	</div>
+</div>
+
+
+</body>
+</html>

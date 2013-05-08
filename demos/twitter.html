@@ -1,0 +1,109 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title></title>
+<meta name="viewport" content="width=device-width">
+<style>
+#extraButtonTest {
+	border:2px solid black;
+	padding:10px;
+}
+	#extraButtonTestController {
+		padding:0 0 8px;
+	}
+</style>
+<script src="../libs/jquery/1.9.1/jquery.js"></script>
+<script src="../jquery.socialthings.js"></script>
+<script>
+
+$(function() {
+
+	$.socialthings.applyTwitterWidgets();
+
+	// extra button test.
+	// apply `initFacebookThings` to create buttons against dynamically added DOM.
+	var $extraButtons = $('#extraButtons');
+	$('#addExtra').click(function() {
+		var ids = [
+			'twittershare',
+			'twitterfollow',
+			'twitterhash',
+			'twittermention'
+		];
+		var index = Math.floor(Math.random() * 100) % 4; // 0 ~ 3
+		var src = $(document.getElementById(ids[index])).html(); // get src
+		$extraButtons.append(src); // then add,
+		$.socialthings.applyTwitterWidgets(); // bump
+	});
+
+});
+
+</script>
+<script type="text/x-htmlsrc" id="twittershare">
+	<a
+		href="https://twitter.com/share"
+		class="twitter-share-button"
+		data-via="Takazudo"
+	>Tweet</a>
+</script>
+<script type="text/x-htmlsrc" id="twitterfollow">
+<a
+	href="https://twitter.com/Takazudo"
+	class="twitter-follow-button"
+	data-show-count="false"
+>Follow @Takazudo</a>
+</script>
+<script type="text/x-htmlsrc" id="twitterhash">
+<a
+	href="https://twitter.com/intent/tweet?button_hashtag=TakazudoIsAwesome"
+	class="twitter-hashtag-button"
+	data-related="Takazudo"
+>Tweet #TakazudoIsAwesome</a>
+</script>
+<script type="text/x-htmlsrc" id="twittermention">
+<a
+	href="https://twitter.com/intent/tweet?screen_name=Takazudo&text=I%20love%20you"
+	class="twitter-mention-button"
+	data-related="Takazudo"
+>Tweet to @Takazudo</a>
+</script>
+</head>
+<body>
+
+<a
+	href="https://twitter.com/share"
+	class="twitter-share-button"
+	data-via="Takazudo"
+>Tweet</a>
+
+<a
+	href="https://twitter.com/Takazudo"
+	class="twitter-follow-button"
+	data-show-count="false"
+>Follow @Takazudo</a>
+
+<a
+	href="https://twitter.com/intent/tweet?button_hashtag=TakazudoIsAwesome"
+	class="twitter-hashtag-button"
+	data-related="Takazudo"
+>Tweet #TakazudoIsAwesome</a>
+
+<a
+	href="https://twitter.com/intent/tweet?screen_name=Takazudo&text=I%20love%20you"
+	class="twitter-mention-button"
+	data-related="Takazudo"
+>Tweet to @Takazudo</a>
+
+
+<div id="extraButtonTest">
+	<div id="extraButtonTestController">
+		<button id="addExtra">add extra button here</button>
+	</div>
+	<div id="extraButtons">
+	</div>
+</div>
+
+
+</body>
+</html>
