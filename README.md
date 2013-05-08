@@ -5,9 +5,9 @@ this does annoying social things.
 ## Demos
 
 * [facebook - standard](http://takazudo.github.io/jQuery.socialthings/demos/facebooklike.html)
-* [facebook - appId](http://takazudo.github.io/jQuery.tabify/demos/facebooklike_with_appId.html)
-* [facebook - locale](http://takazudo.github.io/jQuery.tabify/demos/facebooklike_with_locale.html)
-* [twitter](http://takazudo.github.io/jQuery.tabify/demos/twitter.html)
+* [facebook - appId](http://takazudo.github.io/jQuery.socialthings/demos/facebooklike_with_appId.html)
+* [facebook - locale](http://takazudo.github.io/jQuery.socialthings/demos/facebooklike_with_locale.html)
+* [twitter](http://takazudo.github.io/jQuery.socialthings/demos/twitter.html)
 
 ## Usage
 
