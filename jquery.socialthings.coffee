@@ -65,6 +65,7 @@ do ($ = jQuery, window = window, document = document) ->
 
   ns.applyTwitterWidgets = ->
     unless ns.loadTwitterJS()
+      # https://dev.twitter.com/discussions/6860
       window.twttr.widgets.load()
 
   # ============================================================
