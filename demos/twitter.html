@@ -19,7 +19,7 @@
 
 $(function() {
 
-	$.socialthings.applyTwitterWidgets();
+	$.socialthings.twitter.applyWidgets();
 
 	// extra button test.
 	// apply `initFacebookThings` to create buttons against dynamically added DOM.
@@ -34,7 +34,7 @@ $(function() {
 		var index = Math.floor(Math.random() * 100) % 4; // 0 ~ 3
 		var src = $(document.getElementById(ids[index])).html(); // get src
 		$extraButtons.append(src); // then add,
-		$.socialthings.applyTwitterWidgets(); // bump
+		$.socialthings.twitter.applyWidgets(); // bump
 	});
 
 });

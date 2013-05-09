@@ -8,17 +8,18 @@
   (function($, window, document) {
     var ns;
     ns = {};
-    ns.facebookOptions = {
+    ns.facebook = {};
+    ns.facebook.options = {
       locale: 'en_US',
       appId: null
     };
-    ns.loadFacebookJS = (function() {
+    ns.facebook.loadJS = (function() {
       var init, loaded;
       loaded = false;
       init = function() {
         var o, src;
         $('body').append('<div id="fb-root"></div>');
-        o = ns.facebookOptions;
+        o = ns.facebook.options;
         src = "//connect.facebook.net/" + o.locale + "/all.js#xfbml=1";
         if (o.appId) {
           src += "&appId=" + o.appId;
@@ -46,12 +47,13 @@
     })();
     $.fn.initFacebookThings = function(options) {
       return this.each(function(i, el) {
-        if (!ns.loadFacebookJS()) {
+        if (!ns.facebook.loadJS()) {
           return window.FB.XFBML.parse(el);
         }
       });
     };
-    ns.loadTwitterJS = (function() {
+    ns.twitter = {};
+    ns.twitter.loadJS = (function() {
       var init, loaded;
       loaded = false;
       init = function() {
@@ -76,8 +78,8 @@
         return true;
       };
     })();
-    ns.applyTwitterWidgets = function() {
-      if (!ns.loadTwitterJS()) {
+    ns.twitter.applyWidgets = function() {
+      if (!ns.twitter.loadJS()) {
         return window.twttr.widgets.load();
       }
     };

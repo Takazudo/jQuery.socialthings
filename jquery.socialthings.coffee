@@ -5,17 +5,19 @@ do ($ = jQuery, window = window, document = document) ->
   # ============================================================
   # facebook
 
-  ns.facebookOptions = 
-    locale: 'en_US' # if japanese, ja_JP
-    appId: null
+  ns.facebook = {}
 
-  ns.loadFacebookJS = do ->
+  ns.facebook.options = 
+    locale: 'en_US' # if japanese, ja_JP
+    appId: null # specify your appId to track
+
+  ns.facebook.loadJS = do ->
 
     loaded = false
 
     init = ->
       $('body').append '<div id="fb-root"></div>'
-      o = ns.facebookOptions
+      o = ns.facebook.options
       src = "//connect.facebook.net/#{o.locale}/all.js#xfbml=1"
       if o.appId
         src += "&appId=#{o.appId}"
@@ -36,13 +38,15 @@ do ($ = jQuery, window = window, document = document) ->
 
   $.fn.initFacebookThings = (options) ->
     return @each (i, el) ->
-      unless ns.loadFacebookJS()
+      unless ns.facebook.loadJS()
         window.FB.XFBML.parse el
 
   # ============================================================
   # twitter
+  
+  ns.twitter = {}
 
-  ns.loadTwitterJS = do ->
+  ns.twitter.loadJS = do ->
     
     loaded = false
 
@@ -63,8 +67,8 @@ do ($ = jQuery, window = window, document = document) ->
       init()
       return true
 
-  ns.applyTwitterWidgets = ->
-    unless ns.loadTwitterJS()
+  ns.twitter.applyWidgets = ->
+    unless ns.twitter.loadJS()
       # https://dev.twitter.com/discussions/6860
       window.twttr.widgets.load()
 
