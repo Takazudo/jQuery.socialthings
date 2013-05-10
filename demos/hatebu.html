@@ -1,0 +1,116 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title></title>
+<meta name="viewport" content="width=device-width">
+<style>
+#extraButtonTest {
+	border:2px solid black;
+	padding:10px;
+}
+	#extraButtonTestController {
+		padding:0 0 8px;
+	}
+</style>
+<script src="../libs/jquery/1.9.1/jquery.js"></script>
+<script src="../jquery.socialthings.js"></script>
+<script>
+
+$(function() {
+
+	$.socialthings.hatebu.applyWidgets();
+
+	// extra button test.
+	// apply `initFacebookThings` to create buttons against dynamically added DOM.
+	var $extraButtons = $('#extraButtons');
+	$('#addExtra').click(function() {
+		var ids = [
+			'hatebusrc1',
+			'hatebusrc2',
+			'hatebusrc3',
+			'hatebusrc4'
+		];
+		var index = Math.floor(Math.random() * 100) % 4; // 0 ~ 3
+		var src = $(document.getElementById(ids[index])).html(); // get src
+		$extraButtons.append(src); // then add,
+		$.socialthings.hatebu.applyWidgets(); // bump
+	});
+
+});
+
+</script>
+<script type="text/x-htmlsrc" id="hatebusrc1">
+<a
+	href="http://b.hatena.ne.jp/entry/"
+	class="hatena-bookmark-button"
+	data-hatena-bookmark-layout="simple"
+	title="このエントリーをはてなブックマークに追加"
+><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+</script>
+<script type="text/x-htmlsrc" id="hatebusrc2">
+<a
+	href="http://b.hatena.ne.jp/entry/"
+	class="hatena-bookmark-button"
+	data-hatena-bookmark-layout="simple-balloon"
+	title="このエントリーをはてなブックマークに追加"
+></a>
+</script>
+<script type="text/x-htmlsrc" id="hatebusrc3">
+<a
+	href="http://b.hatena.ne.jp/entry/"
+	class="hatena-bookmark-button"
+	data-hatena-bookmark-layout="standard-balloon"
+	title="このエントリーをはてなブックマークに追加"
+></a>
+</script>
+<script type="text/x-htmlsrc" id="hatebusrc4">
+<a
+	href="http://b.hatena.ne.jp/entry/"
+	class="hatena-bookmark-button"
+	data-hatena-bookmark-layout="vertical-balloon"
+	title="このエントリーをはてなブックマークに追加"
+></a>
+</script>
+</head>
+<body>
+
+<a
+	href="http://b.hatena.ne.jp/entry/"
+	class="hatena-bookmark-button"
+	data-hatena-bookmark-layout="simple"
+	title="このエントリーをはてなブックマークに追加"
+><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+
+<a
+	href="http://b.hatena.ne.jp/entry/"
+	class="hatena-bookmark-button"
+	data-hatena-bookmark-layout="simple-balloon"
+	title="このエントリーをはてなブックマークに追加"
+	><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+
+<a
+	href="http://b.hatena.ne.jp/entry/"
+	class="hatena-bookmark-button"
+	data-hatena-bookmark-layout="standard-balloon"
+	title="このエントリーをはてなブックマークに追加"
+><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+
+<a
+	href="http://b.hatena.ne.jp/entry/"
+	class="hatena-bookmark-button"
+	data-hatena-bookmark-layout="vertical-balloon"
+	title="このエントリーをはてなブックマークに追加"
+><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+
+<div id="extraButtonTest">
+	<div id="extraButtonTestController">
+		<button id="addExtra">add extra button here</button>
+	</div>
+	<div id="extraButtons">
+	</div>
+</div>
+
+
+</body>
+</html>

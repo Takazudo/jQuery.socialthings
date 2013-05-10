@@ -8,6 +8,8 @@ this does annoying social things.
 * [facebook - appId](http://takazudo.github.io/jQuery.socialthings/demos/facebooklike_with_appId.html)
 * [facebook - locale](http://takazudo.github.io/jQuery.socialthings/demos/facebooklike_with_locale.html)
 * [twitter](http://takazudo.github.io/jQuery.socialthings/demos/twitter.html)
+* [hatena bookmark](http://takazudo.github.io/jQuery.socialthings/demos/hatebu.html)
+* [line](http://takazudo.github.io/jQuery.socialthings/demos/line.html)
 
 ## Usage
 

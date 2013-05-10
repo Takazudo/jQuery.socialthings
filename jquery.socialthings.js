@@ -1,5 +1,5 @@
 /*! jQuery.socialthings (https://github.com/Takazudo/jQuery.socialthings)
- * lastupdate: 2013-05-09
+ * lastupdate: 2013-05-10
  * version: 0.0.0
  * author: 'Takazudo' Takeshi Takatsudo <takazudo@gmail.com>
  * License: MIT */
@@ -80,9 +80,74 @@
     })();
     ns.twitter.applyWidgets = function() {
       if (!ns.twitter.loadJS()) {
-        return window.twttr.widgets.load();
+        window.twttr.widgets.load();
       }
     };
+    ns.hatebu = {};
+    ns.hatebu.disabled = false;
+    ns.hatebu.loadJS = (function() {
+      var init, loaded, shouldDisable;
+      loaded = false;
+      shouldDisable = function() {
+        if (document.location.protocol === 'https:') {
+          return true;
+        }
+        return false;
+      };
+      init = function() {
+        loaded = true;
+        if (shouldDisable()) {
+          ns.hatebu.disabled = true;
+          return;
+        }
+        return (function(d, s, id) {
+          var fjs, js;
+          fjs = d.getElementsByTagName(s)[0];
+          if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.charset = 'utf-8';
+            js.async = true;
+            js.src = 'http://b.st-hatena.com/js/bookmark_button.js';
+            return fjs.parentNode.insertBefore(js, fjs);
+          }
+        })(document, "script", "hatebu-wjs");
+      };
+      return function() {
+        if (loaded) {
+          return false;
+        }
+        init();
+        return true;
+      };
+    })();
+    ns.hatebu.applyWidgets = function() {
+      if (!ns.hatebu.loadJS()) {
+        if (ns.hatebu.disabled) {
+          return;
+        }
+        Hatena.Bookmark.BookmarkButton.setup();
+      }
+    };
+    ns.line = {};
+    ns.line.loadJS = (function() {
+      var init, loaded;
+      loaded = false;
+      init = function() {
+        var p, src;
+        p = (/^http:/.test(document.location) ? "http" : "https");
+        src = p + '://media.line.naver.jp/js/line-button.js?v=20130508';
+        document.write("<script src='" + src + "'></script>");
+        loaded = true;
+      };
+      return function() {
+        if (loaded) {
+          return false;
+        }
+        init();
+        return true;
+      };
+    })();
     return $.socialthings = ns;
   })(jQuery, window, document);
 

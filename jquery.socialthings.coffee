@@ -71,7 +71,72 @@ do ($ = jQuery, window = window, document = document) ->
     unless ns.twitter.loadJS()
       # https://dev.twitter.com/discussions/6860
       window.twttr.widgets.load()
+    return
 
+  # ============================================================
+  # hatebu
+
+  ns.hatebu = {}
+  ns.hatebu.disabled = false
+
+  ns.hatebu.loadJS = do ->
+    
+    loaded = false
+
+    shouldDisable = ->
+      return true if document.location.protocol is 'https:'
+      return false
+
+    init = ->
+
+      loaded = true
+
+      if shouldDisable()
+        ns.hatebu.disabled = true
+        return
+
+      do (d = document, s = "script", id = "hatebu-wjs") ->
+        fjs = d.getElementsByTagName(s)[0]
+        unless d.getElementById(id)
+          js = d.createElement(s)
+          js.id = id
+          js.charset = 'utf-8'
+          js.async = true
+          js.src = 'http://b.st-hatena.com/js/bookmark_button.js'
+          fjs.parentNode.insertBefore js, fjs
+
+    return ->
+      return false if loaded
+      init()
+      return true
+
+  ns.hatebu.applyWidgets = ->
+    unless ns.hatebu.loadJS()
+      return if ns.hatebu.disabled
+      Hatena.Bookmark.BookmarkButton.setup()
+    return
+
+  # ============================================================
+  # line
+
+  ns.line = {}
+
+  ns.line.loadJS = do ->
+    
+    loaded = false
+
+    init = ->
+      p = (if /^http:/.test(document.location) then "http" else "https")
+      src = p + '://media.line.naver.jp/js/line-button.js?v=20130508'
+      document.write "<script src='#{src}'></script>"
+      loaded = true
+      return
+
+    return ->
+      return false if loaded
+      init()
+      return true
+  
   # ============================================================
   # globalify
 
