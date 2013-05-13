@@ -75,6 +75,7 @@ do ($ = jQuery, window = window, document = document) ->
 
   # ============================================================
   # gplus
+  # https://developers.google.com/+/web/+1button/?hl=en
   
   ns.gplus = {}
   ns.gplus.options = 
