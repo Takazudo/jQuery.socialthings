@@ -1,5 +1,5 @@
 /*! jQuery.socialthings (https://github.com/Takazudo/jQuery.socialthings)
- * lastupdate: 2013-05-10
+ * lastupdate: 2013-05-13
  * version: 0.0.0
  * author: 'Takazudo' Takeshi Takatsudo <takazudo@gmail.com>
  * License: MIT */
@@ -81,6 +81,35 @@
     ns.twitter.applyWidgets = function() {
       if (!ns.twitter.loadJS()) {
         window.twttr.widgets.load();
+      }
+    };
+    ns.gplus = {};
+    ns.gplus.options = {
+      lang: 'en'
+    };
+    ns.gplus.loadJS = (function() {
+      var init, loaded;
+      loaded = false;
+      init = function() {
+        window.___gcfg = {
+          lang: ns.gplus.options.lang
+        };
+        $.getScript('https://apis.google.com/js/plusone.js');
+        loaded = true;
+      };
+      return function() {
+        if (loaded) {
+          return false;
+        }
+        init();
+        return true;
+      };
+    })();
+    ns.gplus.applyWidgets = function() {
+      if (!ns.gplus.loadJS()) {
+        if (window.gapi) {
+          window.gapi.plusone.go();
+        }
       }
     };
     ns.hatebu = {};

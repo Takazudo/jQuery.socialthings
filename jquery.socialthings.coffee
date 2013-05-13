@@ -74,6 +74,35 @@ do ($ = jQuery, window = window, document = document) ->
     return
 
   # ============================================================
+  # gplus
+  
+  ns.gplus = {}
+  ns.gplus.options = 
+    lang: 'en' # if japanese, 'ja'
+
+  ns.gplus.loadJS = do ->
+
+    loaded = false
+
+    init = ->
+      window.___gcfg = lang: ns.gplus.options.lang
+      $.getScript('https://apis.google.com/js/plusone.js')
+      loaded = true
+      return
+
+    return ->
+      return false if loaded
+      init()
+      return true
+
+  ns.gplus.applyWidgets = ->
+    unless ns.gplus.loadJS()
+      if window.gapi
+        window.gapi.plusone.go()
+    return
+
+
+  # ============================================================
   # hatebu
 
   ns.hatebu = {}

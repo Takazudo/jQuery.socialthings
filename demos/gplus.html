@@ -1,0 +1,74 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title></title>
+<meta name="viewport" content="width=device-width">
+<style>
+#extraButtonTest {
+	border:2px solid black;
+	padding:10px;
+}
+	#extraButtonTestController {
+		padding:0 0 8px;
+	}
+</style>
+<script src="../libs/jquery/1.9.1/jquery.js"></script>
+<script src="../jquery.socialthings.js"></script>
+<script>
+
+$(function() {
+
+	$.socialthings.gplus.applyWidgets();
+
+	// extra button test.
+	// apply `initFacebookThings` to create buttons against dynamically added DOM.
+	var $extraButtons = $('#extraButtons');
+	$('#addExtra').click(function() {
+		var ids = [
+			'gplussrc1',
+			'gplussrc2',
+			'gplussrc3',
+			'gplussrc4'
+		];
+		var index = Math.floor(Math.random() * 100) % 4; // 0 ~ 3
+		var src = $(document.getElementById(ids[index])).html(); // get src
+		$extraButtons.append(src); // then add,
+		$.socialthings.gplus.applyWidgets(); // bump
+	});
+
+});
+
+</script>
+<script type="text/x-htmlsrc" id="gplussrc1">
+	<div class="g-plusone" data-size="small" data-annotation="inline" data-width="300"></div>
+</script>
+<script type="text/x-htmlsrc" id="gplussrc2">
+	<div class="g-plusone" data-size="medium"></div>
+</script>
+<script type="text/x-htmlsrc" id="gplussrc3">
+	<div class="g-plusone" data-annotation="inline" data-width="300"></div>
+</script>
+<script type="text/x-htmlsrc" id="gplussrc4">
+	<div class="g-plusone" data-size="tall"></div>
+</script>
+
+</head>
+<body>
+
+<div class="g-plusone" data-size="small" data-annotation="inline" data-width="300"></div>
+<div class="g-plusone" data-size="medium"></div>
+<div class="g-plusone" data-annotation="inline" data-width="300"></div>
+<div class="g-plusone" data-size="tall"></div>
+
+<div id="extraButtonTest">
+	<div id="extraButtonTestController">
+		<button id="addExtra">add extra button here</button>
+	</div>
+	<div id="extraButtons">
+	</div>
+</div>
+
+
+</body>
+</html>
