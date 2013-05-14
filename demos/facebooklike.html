@@ -29,9 +29,10 @@ $(function() {
 	$('#addExtra').click(function() {
 		var ids = [
 			'fblikeboxsrc',
-			'fblikebuttonsrc'
+			'fblikebuttonsrc',
+			'fbcommentsrc'
 		];
-		var index = Math.floor(Math.random() * 100) % 2; // 0 or 1
+		var index = Math.floor(Math.random() * 100) % 3; // 0 ~ 2
 		var src = $(document.getElementById(ids[index])).html(); // get src
 		var $newButton = $('<span></span>').html(src); // span wrap 
 		$extraButtons.append($newButton); // then add,
@@ -62,6 +63,14 @@ $(function() {
 	data-border-color="#ffffff"
 	data-header="true"
 ></div>
+</script>
+<script type="text/x-htmlsrc" id="fbcommentsrc">
+	<div
+		class="fb-comments"
+		data-href="http://example.com"
+		data-width="470"
+		data-num-posts="10"
+	></div>
 </script>
 </head>
 <body>
@@ -98,6 +107,15 @@ $(function() {
 		data-stream="false"
 		data-border-color="#ffffff"
 		data-header="true"
+	></div>
+</div>
+
+<div class="liketest">
+	<div
+		class="fb-comments"
+		data-href="http://example.com"
+		data-width="470"
+		data-num-posts="10"
 	></div>
 </div>
 
