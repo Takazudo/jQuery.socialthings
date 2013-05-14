@@ -1,0 +1,70 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title></title>
+<meta name="viewport" content="width=device-width">
+<style>
+#extraButtonTest {
+	border:2px solid black;
+	padding:10px;
+}
+	#extraButtonTestController {
+		padding:0 0 8px;
+	}
+</style>
+<script src="../libs/jquery/1.9.1/jquery.js"></script>
+<script src="../jquery.socialthings.js"></script>
+<script>
+
+$(function() {
+
+	// load pocket first. All buttons on the page will be created.
+	// normally, this is enough.
+	$.socialthings.pocket.applyWidgets();
+
+	// extra button test.
+	var $extraButtons = $('#extraButtons');
+	$('#addExtra').click(function() {
+		var ids = [
+			'pocketsrc1',
+			'pocketsrc2',
+			'pocketsrc3'
+		];
+		var index = Math.floor(Math.random() * 100) % 3; // 0 ~ 2
+		var src = $(document.getElementById(ids[index])).html(); // get src
+		var $newButton = $('<span></span>').html(src); // span wrap 
+		$extraButtons.append($newButton); // then add,
+		$.socialthings.pocket.applyWidgets(); // apply pocket button
+	});
+
+});
+
+</script>
+<script type="text/x-htmlsrc" id="pocketsrc1">
+	<a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+</script>
+<script type="text/x-htmlsrc" id="pocketsrc2">
+	<a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+</script>
+<script type="text/x-htmlsrc" id="pocketsrc3">
+	<a data-pocket-label="pocket" data-pocket-count="vertical" class="pocket-btn" data-lang="en"></a>
+</script>
+</head>
+<body>
+
+<a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+<a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+<a data-pocket-label="pocket" data-pocket-count="vertical" class="pocket-btn" data-lang="en"></a>
+
+<div id="extraButtonTest">
+	<div id="extraButtonTestController">
+		<button id="addExtra">add extra button here</button>
+	</div>
+	<div id="extraButtons">
+	</div>
+</div>
+
+
+</body>
+</html>

@@ -148,6 +148,7 @@ do ($ = jQuery, window = window, document = document) ->
 
   # ============================================================
   # line
+  # http://media.line.naver.jp/ja/
 
   ns.line = {}
 
@@ -166,6 +167,19 @@ do ($ = jQuery, window = window, document = document) ->
       return false if loaded
       init()
       return true
+
+  # ============================================================
+  # pocket
+  # http://getpocket.com/publisher/button
+  
+  ns.pocket = {}
+
+  ns.pocket.loadJS = ->
+    $.getScript('https://widgets.getpocket.com/v1/j/btn.js?v=1')
+
+  ns.pocket.applyWidgets = ->
+    ns.pocket.loadJS()
+    return
   
   # ============================================================
   # globalify
