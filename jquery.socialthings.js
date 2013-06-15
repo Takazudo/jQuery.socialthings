@@ -1,5 +1,5 @@
 /*! jQuery.socialthings (https://github.com/Takazudo/jQuery.socialthings)
- * lastupdate: 2013-05-14
+ * lastupdate: 2013-06-15
  * version: 0.0.0
  * author: 'Takazudo' Takeshi Takatsudo <takazudo@gmail.com>
  * License: MIT */
@@ -184,6 +184,57 @@
     ns.pocket.applyWidgets = function() {
       ns.pocket.loadJS();
     };
+    ns.mixi = {};
+    ns.mixi.loadJS = (function() {
+      var init, loaded;
+      loaded = false;
+      init = function() {
+        return (function(d, s, id) {
+          var fjs, js, p;
+          fjs = d.getElementsByTagName(s)[0];
+          p = (/^http:/.test(d.location) ? "http" : "https");
+          if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.src = p + "://static.mixi.jp/js/share.js";
+            fjs.parentNode.insertBefore(js, fjs);
+          }
+          loaded = true;
+        })(document, "script", "mixi_check");
+      };
+      return function() {
+        if (loaded) {
+          return false;
+        }
+        init();
+        return true;
+      };
+    })();
+    ns.sumally = {};
+    ns.sumally.loadJS = (function() {
+      var init, loaded;
+      loaded = false;
+      init = function() {
+        return (function(d, s, id) {
+          var fjs, js, p;
+          fjs = d.getElementsByTagName(s)[0];
+          p = (/^http:/.test(d.location) ? "http" : "https");
+          if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + '://platform.sumally.com/buttons.min.js';
+            fjs.parentNode.insertBefore(js, fjs);
+          }
+          loaded = true;
+        })(document, "script", "sumally-bjs");
+      };
+      return function() {
+        if (loaded) {
+          return false;
+        }
+        init();
+        return true;
+      };
+    })();
     return $.socialthings = ns;
   })(jQuery, window, document);
 

@@ -180,7 +180,60 @@ do ($ = jQuery, window = window, document = document) ->
   ns.pocket.applyWidgets = ->
     ns.pocket.loadJS()
     return
-  
+
+  # ============================================================
+  # mixi_check
+  # http://developer.mixi.co.jp/connect/mixi_plugin/mixi_check/
+
+  ns.mixi = {}
+
+  ns.mixi.loadJS = do ->
+
+    loaded = false
+
+    init = ->
+      do (d = document, s = "script", id = "mixi_check") ->
+        fjs = d.getElementsByTagName(s)[0]
+        p = (if /^http:/.test(d.location) then "http" else "https")
+        unless d.getElementById(id)
+          js = d.createElement(s)
+          js.src = p + "://static.mixi.jp/js/share.js"
+          fjs.parentNode.insertBefore js, fjs
+        loaded = true
+        return
+
+    return ->
+      return false if loaded
+      init()
+      return true
+
+  # ============================================================
+  # Sumally
+  # http://sumally.com/about/buttons
+
+  ns.sumally = {}
+
+  ns.sumally.loadJS = do ->
+
+    loaded = false
+
+    init = ->
+      do (d = document, s = "script", id = "sumally-bjs") ->
+        fjs = d.getElementsByTagName(s)[0]
+        p = (if /^http:/.test(d.location) then "http" else "https")
+        unless d.getElementById(id)
+          js = d.createElement(s)
+          js.id = id
+          js.src = p + '://platform.sumally.com/buttons.min.js'
+          fjs.parentNode.insertBefore(js, fjs)
+        loaded = true
+        return
+
+    return ->
+      return false if loaded
+      init()
+      return true
+
   # ============================================================
   # globalify
 
