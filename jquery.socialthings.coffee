@@ -189,23 +189,22 @@ do ($ = jQuery, window = window, document = document) ->
 
   ns.mixi.loadJS = do ->
 
-    loaded = false
-
-    init = ->
-      do (d = document, s = "script", id = "mixi_check") ->
-        fjs = d.getElementsByTagName(s)[0]
-        p = (if /^http:/.test(d.location) then "http" else "https")
-        unless d.getElementById(id)
-          js = d.createElement(s)
-          js.src = p + "://static.mixi.jp/js/share.js"
-          fjs.parentNode.insertBefore js, fjs
-        loaded = true
-        return
+    init = (d = document, s = "script") ->
+      fjs = d.getElementsByTagName(s)[0]
+      p = (if /^http:/.test(d.location) then "http" else "https")
+      js = d.createElement(s)
+      js.src = p + "://static.mixi.jp/js/share.js"
+      fjs.parentNode.insertBefore js, fjs
+      return
 
     return ->
-      return false if loaded
       init()
-      return true
+
+  ns.mixi.applyWidgets = ->
+    # mixi check button does not have API for new buttons;
+    # so, load js again.
+    ns.mixi.loadJS()
+    return
 
   # ============================================================
   # Sumally

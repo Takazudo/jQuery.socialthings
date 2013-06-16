@@ -1,5 +1,5 @@
 /*! jQuery.socialthings (https://github.com/Takazudo/jQuery.socialthings)
- * lastupdate: 2013-06-15
+ * lastupdate: 2013-06-16
  * version: 0.0.0
  * author: 'Takazudo' Takeshi Takatsudo <takazudo@gmail.com>
  * License: MIT */
@@ -186,29 +186,28 @@
     };
     ns.mixi = {};
     ns.mixi.loadJS = (function() {
-      var init, loaded;
-      loaded = false;
-      init = function() {
-        return (function(d, s, id) {
-          var fjs, js, p;
-          fjs = d.getElementsByTagName(s)[0];
-          p = (/^http:/.test(d.location) ? "http" : "https");
-          if (!d.getElementById(id)) {
-            js = d.createElement(s);
-            js.src = p + "://static.mixi.jp/js/share.js";
-            fjs.parentNode.insertBefore(js, fjs);
-          }
-          loaded = true;
-        })(document, "script", "mixi_check");
+      var init;
+      init = function(d, s) {
+        var fjs, js, p;
+        if (d == null) {
+          d = document;
+        }
+        if (s == null) {
+          s = "script";
+        }
+        fjs = d.getElementsByTagName(s)[0];
+        p = (/^http:/.test(d.location) ? "http" : "https");
+        js = d.createElement(s);
+        js.src = p + "://static.mixi.jp/js/share.js";
+        fjs.parentNode.insertBefore(js, fjs);
       };
       return function() {
-        if (loaded) {
-          return false;
-        }
-        init();
-        return true;
+        return init();
       };
     })();
+    ns.mixi.applyWidgets = function() {
+      ns.mixi.loadJS();
+    };
     ns.sumally = {};
     ns.sumally.loadJS = (function() {
       var init, loaded;

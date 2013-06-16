@@ -21,9 +21,22 @@ $(function() {
 	// mixi check
 	$.socialthings.mixi.loadJS();
 
+	var $extraButtons = $('#extraButtons');
+	$('#addExtra').click(function() {
+		var src = $(document.getElementById('mixisrc')).html(); // get src
+		$extraButtons.append(src); // then add,
+		$.socialthings.mixi.applyWidgets(); // bump
+	});
+
 });
 </script>
-
+<script type="text/x-htmlsrc" id="mixisrc">
+	<a
+		href="http://mixi.jp/share.pl"
+		class="mixi-check-button"
+		data-key=""
+	>mixiチェック</a>
+</script>
 </head>
 <body>
 
@@ -32,6 +45,15 @@ $(function() {
 	class="mixi-check-button"
 	data-key=""
 >mixiチェック</a>
+
+<div id="extraButtonTest">
+	<div id="extraButtonTestController">
+		<button id="addExtra">add extra button here</button>
+	</div>
+	<div id="extraButtons">
+	</div>
+</div>
+
 
 </body>
 </html>
