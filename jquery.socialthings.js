@@ -202,7 +202,8 @@
         fjs.parentNode.insertBefore(js, fjs);
       };
       return function() {
-        return init();
+        init();
+        return true;
       };
     })();
     ns.mixi.applyWidgets = function() {
@@ -217,23 +218,21 @@
           var fjs, js, p;
           fjs = d.getElementsByTagName(s)[0];
           p = (/^http:/.test(d.location) ? "http" : "https");
-          if (!d.getElementById(id)) {
-            js = d.createElement(s);
-            js.id = id;
-            js.src = p + '://platform.sumally.com/buttons.min.js';
-            fjs.parentNode.insertBefore(js, fjs);
-          }
+          js = d.createElement(s);
+          js.id = id;
+          js.src = p + '://platform.sumally.com/buttons.min.js';
+          fjs.parentNode.insertBefore(js, fjs);
           loaded = true;
         })(document, "script", "sumally-bjs");
       };
       return function() {
-        if (loaded) {
-          return false;
-        }
         init();
         return true;
       };
     })();
+    ns.sumally.applyWidgets = function() {
+      return ns.sumally.loadJS();
+    };
     return $.socialthings = ns;
   })(jQuery, window, document);
 

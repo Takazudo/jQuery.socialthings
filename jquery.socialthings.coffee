@@ -199,6 +199,7 @@ do ($ = jQuery, window = window, document = document) ->
 
     return ->
       init()
+      return true
 
   ns.mixi.applyWidgets = ->
     # mixi check button does not have API for new buttons;
@@ -220,18 +221,21 @@ do ($ = jQuery, window = window, document = document) ->
       do (d = document, s = "script", id = "sumally-bjs") ->
         fjs = d.getElementsByTagName(s)[0]
         p = (if /^http:/.test(d.location) then "http" else "https")
-        unless d.getElementById(id)
-          js = d.createElement(s)
-          js.id = id
-          js.src = p + '://platform.sumally.com/buttons.min.js'
-          fjs.parentNode.insertBefore(js, fjs)
+        js = d.createElement(s)
+        js.id = id # without this, widgets do not work.
+        js.src = p + '://platform.sumally.com/buttons.min.js'
+        fjs.parentNode.insertBefore(js, fjs)
         loaded = true
         return
 
     return ->
-      return false if loaded
       init()
       return true
+
+  ns.sumally.applyWidgets = ->
+    # sumally button does not have API for new buttons;
+    # so, load js again.
+    ns.sumally.loadJS()
 
   # ============================================================
   # globalify
