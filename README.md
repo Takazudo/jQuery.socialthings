@@ -13,6 +13,8 @@ this does annoying social things.
 * [hatena bookmark](http://takazudo.github.io/jQuery.socialthings/demos/hatebu.html)
 * [line](http://takazudo.github.io/jQuery.socialthings/demos/line.html)
 * [pocket](http://takazudo.github.io/jQuery.socialthings/demos/pocket.html)
+* [mixi check](http://takazudo.github.io/jQuery.socialthings/demos/mixi.html)
+* [sumally](http://takazudo.github.io/jQuery.socialthings/demos/sumally.html)
 
 ## Usage
 
