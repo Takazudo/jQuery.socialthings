@@ -1,5 +1,5 @@
 /*! jQuery.socialthings (https://github.com/Takazudo/jQuery.socialthings)
- * lastupdate: 2013-06-16
+ * lastupdate: 2013-06-17
  * version: 0.1.0
  * author: 'Takazudo' Takeshi Takatsudo <takazudo@gmail.com>
  * License: MIT */
@@ -226,12 +226,17 @@
         })(document, "script", "sumally-bjs");
       };
       return function() {
+        if (loaded) {
+          return false;
+        }
         init();
         return true;
       };
     })();
     ns.sumally.applyWidgets = function() {
-      return ns.sumally.loadJS();
+      if (!ns.sumally.loadJS()) {
+        window.sumally.buttons.load();
+      }
     };
     return $.socialthings = ns;
   })(jQuery, window, document);

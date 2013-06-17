@@ -218,6 +218,7 @@ do ($ = jQuery, window = window, document = document) ->
     loaded = false
 
     init = ->
+
       do (d = document, s = "script", id = "sumally-bjs") ->
         fjs = d.getElementsByTagName(s)[0]
         p = (if /^http:/.test(d.location) then "http" else "https")
@@ -229,13 +230,14 @@ do ($ = jQuery, window = window, document = document) ->
         return
 
     return ->
+      return false if loaded
       init()
       return true
 
   ns.sumally.applyWidgets = ->
-    # sumally button does not have API for new buttons;
-    # so, load js again.
-    ns.sumally.loadJS()
+    unless ns.sumally.loadJS()
+      window.sumally.buttons.load()
+    return
 
   # ============================================================
   # globalify
