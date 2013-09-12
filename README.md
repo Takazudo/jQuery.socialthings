@@ -12,6 +12,7 @@ this does annoying social things.
 * [google plus - lang](http://takazudo.github.io/jQuery.socialthings/demos/gplus_lang.html)
 * [hatena bookmark](http://takazudo.github.io/jQuery.socialthings/demos/hatebu.html)
 * [line](http://takazudo.github.io/jQuery.socialthings/demos/line.html)
+* [line \(manually\)](http://takazudo.github.io/jQuery.socialthings/demos/manualLine.html)
 * [pocket](http://takazudo.github.io/jQuery.socialthings/demos/pocket.html)
 * [mixi check](http://takazudo.github.io/jQuery.socialthings/demos/mixi.html)
 * [sumally](http://takazudo.github.io/jQuery.socialthings/demos/sumally.html)
