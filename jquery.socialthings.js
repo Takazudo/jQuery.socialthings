@@ -205,7 +205,7 @@
       function Button($el, options) {
         this.$el = $el;
         this.options = $.extend({}, ns.manualLine.Button.defaults, options);
-        if (this.options.hide_when_pc) {
+        if (this.options.hide_when_pc && (!ns.manualLine.isSmartphone())) {
           return;
         }
         this.render();

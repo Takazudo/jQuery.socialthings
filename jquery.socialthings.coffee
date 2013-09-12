@@ -196,7 +196,7 @@ do ($ = jQuery) ->
 
     constructor: (@$el, options) ->
       @options = $.extend {}, ns.manualLine.Button.defaults, options
-      if @options.hide_when_pc
+      if @options.hide_when_pc and (not ns.manualLine.isSmartphone())
         return
       @render()
     
