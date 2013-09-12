@@ -1,5 +1,9 @@
 # Change log
 
+## v0.1.3
+
+* Fixed: manualLine show_on_pc option was not working
+
 ## v0.1.2
 
 * implemented manualLine
