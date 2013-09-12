@@ -1,4 +1,4 @@
-do ($ = jQuery, window = window, document = document) ->
+do ($ = jQuery) ->
 
   ns = {}
 
@@ -169,6 +169,83 @@ do ($ = jQuery, window = window, document = document) ->
       return true
 
   # ============================================================
+  # manualLine
+  # custom version of line button
+  # http://media.line.naver.jp/howto/ja/
+
+  ns.manualLine = {}
+  ns.manualLine.config =
+    data_key: 'socialthingsManuallinebutton'
+
+  ns.manualLine.isSmartphone = ->
+    return navigator.userAgent.match /(iPhone|iPod|iPad|Android)/i
+
+  class ns.manualLine.Button
+    
+    @defaults =
+      url: -> location.href
+      title: -> document.title
+      href_creater: (title, url) ->
+        "http://line.naver.jp/R/msg/text/?#{title}%0D%0A#{url}"
+      hide_when_pc: false
+      html: """
+        <a href="#"><img src="http://media.line.naver.jp/img/button/ja/88x20.png" alt="Lineで送る" width="88" height="20"></a>
+      """
+      prop_key_url: 'data-manualline-url'
+      prop_key_title: 'data-manualline-title'
+
+    constructor: (@$el, options) ->
+      @options = $.extend {}, ns.manualLine.Button.defaults, options
+      if @options.hide_when_pc
+        return
+      @render()
+    
+    render: ->
+      @$el.html @options.html
+      href = @_createHref()
+      $('a', @$el).attr 'href', href
+
+    _createHref: ->
+      title = @_createTitle()
+      url = @_createUrl()
+      href = @options.href_creater title, url
+      return href
+
+    _createTitle: ->
+      title = @_getValFromDataProp @options.prop_key_title
+      return title if title?
+      return @_handleOptionVal @options.title
+
+    _createUrl: ->
+      url = @_getValFromDataProp @options.prop_key_url
+      return url if url?
+      return @_handleOptionVal @options.url
+
+    _getValFromDataProp: (propName) ->
+      val = @$el.attr propName
+      if val?
+        return val
+      return null
+
+    _handleOptionVal: (val) ->
+      switch $.type val
+        when 'function'
+          return val()
+        else
+          return val
+
+
+  $.fn.manualLineButton = (options) ->
+    return @each (i, el) ->
+      $el = $(el)
+      data_key = ns.manualLine.config.data_key
+      instance = $el.data data_key
+      unless instance?
+        instance = new ns.manualLine.Button $el, options
+      $el.data data_key, instance
+      return
+
+  # ============================================================
   # pocket
   # http://getpocket.com/publisher/button
   
@@ -243,3 +320,4 @@ do ($ = jQuery, window = window, document = document) ->
   # globalify
 
   $.socialthings = ns
+

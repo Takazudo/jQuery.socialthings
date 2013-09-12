@@ -1,11 +1,11 @@
 /*! jQuery.socialthings (https://github.com/Takazudo/jQuery.socialthings)
- * lastupdate: 2013-06-17
+ * lastupdate: 2013-09-12
  * version: 0.1.1
  * author: 'Takazudo' Takeshi Takatsudo <takazudo@gmail.com>
  * License: MIT */
 (function() {
 
-  (function($, window, document) {
+  (function($) {
     var ns;
     ns = {};
     ns.facebook = {};
@@ -177,6 +177,106 @@
         return true;
       };
     })();
+    ns.manualLine = {};
+    ns.manualLine.config = {
+      data_key: 'socialthingsManuallinebutton'
+    };
+    ns.manualLine.isSmartphone = function() {
+      return navigator.userAgent.match(/(iPhone|iPod|iPad|Android)/i);
+    };
+    ns.manualLine.Button = (function() {
+
+      Button.defaults = {
+        url: function() {
+          return location.href;
+        },
+        title: function() {
+          return document.title;
+        },
+        href_creater: function(title, url) {
+          return "http://line.naver.jp/R/msg/text/?" + title + "%0D%0A" + url;
+        },
+        hide_when_pc: false,
+        html: "<a href=\"#\"><img src=\"http://media.line.naver.jp/img/button/ja/88x20.png\" alt=\"Lineで送る\" width=\"88\" height=\"20\"></a>",
+        prop_key_url: 'data-manualline-url',
+        prop_key_title: 'data-manualline-title'
+      };
+
+      function Button($el, options) {
+        this.$el = $el;
+        this.options = $.extend({}, ns.manualLine.Button.defaults, options);
+        if (this.options.hide_when_pc) {
+          return;
+        }
+        this.render();
+      }
+
+      Button.prototype.render = function() {
+        var href;
+        this.$el.html(this.options.html);
+        href = this._createHref();
+        return $('a', this.$el).attr('href', href);
+      };
+
+      Button.prototype._createHref = function() {
+        var href, title, url;
+        title = this._createTitle();
+        url = this._createUrl();
+        href = this.options.href_creater(title, url);
+        return href;
+      };
+
+      Button.prototype._createTitle = function() {
+        var title;
+        title = this._getValFromDataProp(this.options.prop_key_title);
+        if (title != null) {
+          return title;
+        }
+        return this._handleOptionVal(this.options.title);
+      };
+
+      Button.prototype._createUrl = function() {
+        var url;
+        url = this._getValFromDataProp(this.options.prop_key_url);
+        if (url != null) {
+          return url;
+        }
+        return this._handleOptionVal(this.options.url);
+      };
+
+      Button.prototype._getValFromDataProp = function(propName) {
+        var val;
+        val = this.$el.attr(propName);
+        if (val != null) {
+          return val;
+        }
+        return null;
+      };
+
+      Button.prototype._handleOptionVal = function(val) {
+        switch ($.type(val)) {
+          case 'function':
+            return val();
+          default:
+            return val;
+        }
+      };
+
+      return Button;
+
+    })();
+    $.fn.manualLineButton = function(options) {
+      return this.each(function(i, el) {
+        var $el, data_key, instance;
+        $el = $(el);
+        data_key = ns.manualLine.config.data_key;
+        instance = $el.data(data_key);
+        if (instance == null) {
+          instance = new ns.manualLine.Button($el, options);
+        }
+        $el.data(data_key, instance);
+      });
+    };
     ns.pocket = {};
     ns.pocket.loadJS = function() {
       return $.getScript('https://widgets.getpocket.com/v1/j/btn.js?v=1');
@@ -239,6 +339,6 @@
       }
     };
     return $.socialthings = ns;
-  })(jQuery, window, document);
+  })(jQuery);
 
 }).call(this);

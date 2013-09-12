@@ -1,0 +1,79 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title>DUMMY PAGE TITLE</title>
+<meta name="viewport" content="width=device-width">
+<style>
+#extraButtonTest {
+	border:2px solid black;
+	padding:10px;
+}
+	#extraButtonTestController {
+		padding:0 0 8px;
+	}
+</style>
+<script src="../libs/jquery/1.9.1/jquery.js"></script>
+<script src="../jquery.socialthings.js"></script>
+<script>
+$(function() {
+
+	$('.linebutton1').manualLineButton();
+
+	$('.linebutton2').manualLineButton({
+		hide_when_pc: true
+	});
+
+	$('.linebutton3').manualLineButton({
+		html: '<a href="#"><img src="http://media.line.naver.jp/img/button/ja/36x60.png" alt="Lineで送る" width="36" height="60"></a>'
+	});
+
+	$('.linebutton4').manualLineButton({
+		url: function() {
+			return location.href + '?from=line'
+		}
+	});
+
+});
+</script>
+</head>
+<body>
+
+<h1>$.socialThings.manualLine</h1>
+
+<p>I needed to make my line button manually because official line button script sucks.</p>
+
+<h2>Demos</h2>
+
+<h3>title: document.title / url: location.href (default)</h3>
+
+<span class="linebutton1"></span>
+
+<h3>title: document.title / url: data value</h3>
+
+<span class="linebutton1" data-manualline-url="http://example.com"></span>
+
+<h3>title: data value / url: location.href</h3>
+
+<span class="linebutton1" data-manualline-title="DATA KEY TITLE"></span>
+
+<h3>title: data value / url: data value</h3>
+
+<span class="linebutton1" data-manualline-title="DATA KEY TITLE" data-manualline-url="http://example.com"></span>
+
+<h3>hide_when_pc: true</h3>
+<p>will be shown on smartphone only.</p>
+
+<span class="linebutton2"></span>
+
+<h3>html: "html source inside"</h3>
+
+<span class="linebutton3"></span>
+
+<h3>url option</h3>
+
+<span class="linebutton4"></span>
+
+
+</body>
+</html>
