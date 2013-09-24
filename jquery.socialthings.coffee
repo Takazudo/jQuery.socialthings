@@ -61,8 +61,8 @@ do ($ = jQuery) ->
     constructor: (@$el, options) ->
       @options = $.extend {}, ns.facebookShareButton.Button.defaults, options
       @_tweakInsideHtml()
-      @_prepareUrl()
       @_handleDataAttrs()
+      @_prepareUrl()
       @_eventify()
 
     open: ->

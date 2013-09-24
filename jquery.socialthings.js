@@ -68,8 +68,8 @@
         this.$el = $el;
         this.options = $.extend({}, ns.facebookShareButton.Button.defaults, options);
         this._tweakInsideHtml();
-        this._prepareUrl();
         this._handleDataAttrs();
+        this._prepareUrl();
         this._eventify();
       }
 
