@@ -1,5 +1,9 @@
 # Change log
 
+## v0.1.5
+
+* Fixed: facebook share button did not get url val from DOM
+
 ## v0.1.4
 
 * implemented facebook share button
