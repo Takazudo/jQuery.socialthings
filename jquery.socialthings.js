@@ -1,6 +1,6 @@
 /*! jQuery.socialthings (https://github.com/Takazudo/jQuery.socialthings)
  * lastupdate: 2013-09-24
- * version: 0.1.4
+ * version: 0.1.5
  * author: 'Takazudo' Takeshi Takatsudo <takazudo@gmail.com>
  * License: MIT */
 (function() {
