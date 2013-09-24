@@ -7,6 +7,7 @@ this does annoying social things.
 * [facebook - standard](http://takazudo.github.io/jQuery.socialthings/demos/facebooklike.html)
 * [facebook - appId](http://takazudo.github.io/jQuery.socialthings/demos/facebooklike_with_appId.html)
 * [facebook - locale](http://takazudo.github.io/jQuery.socialthings/demos/facebooklike_with_locale.html)
+* [facebookshare](http://takazudo.github.io/jQuery.socialthings/demos/facebookshare.html)
 * [twitter](http://takazudo.github.io/jQuery.socialthings/demos/twitter.html)
 * [google plus](http://takazudo.github.io/jQuery.socialthings/demos/gplus.html)
 * [google plus - lang](http://takazudo.github.io/jQuery.socialthings/demos/gplus_lang.html)
