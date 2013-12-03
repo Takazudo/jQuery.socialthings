@@ -1,5 +1,5 @@
 /*! jQuery.socialthings (https://github.com/Takazudo/jQuery.socialthings)
- * lastupdate: 2013-09-24
+ * lastupdate: 2013-12-03
  * version: 0.1.5
  * author: 'Takazudo' Takeshi Takatsudo <takazudo@gmail.com>
  * License: MIT */
@@ -172,6 +172,118 @@
       if (!ns.twitter.loadJS()) {
         window.twttr.widgets.load();
       }
+    };
+    ns.twitterShareButton = {};
+    ns.twitterShareButton.Button = (function() {
+
+      Button.defaults = {
+        windowname: 'twitter-tweet-dialog',
+        width: null,
+        height: null,
+        url: null,
+        html: null,
+        text: null,
+        via: null,
+        related: null,
+        tweakHref: true
+      };
+
+      function Button($el, options) {
+        this.$el = $el;
+        this.options = $.extend({}, ns.twitterShareButton.Button.defaults, options);
+        this._tweakInsideHtml();
+        this._handleDataAttrs();
+        this._prepareUrl();
+        this._eventify();
+      }
+
+      Button.prototype.open = function() {
+        var args, name, o;
+        o = this.options;
+        name = o.windowname;
+        args = [this._url, name];
+        if ((o.width != null) && (o.height != null)) {
+          args.push("width=" + o.width + ",height=" + o.height);
+        }
+        return window.open.apply(window, args);
+      };
+
+      Button.prototype._tweakInsideHtml = function() {
+        if (this.options.html == null) {
+          return;
+        }
+        return this.$el.html(this.options.html);
+      };
+
+      Button.prototype._prepareUrl = function() {
+        var o, params, related, shareUrl, tweetText, via;
+        o = this.options;
+        shareUrl = o.url || location.href;
+        tweetText = o.text || document.title;
+        via = o.via;
+        related = o.related;
+        params = [];
+        if (shareUrl) {
+          params.push("url=" + (encodeURIComponent(shareUrl)));
+        }
+        if (tweetText) {
+          params.push("text=" + (encodeURIComponent(tweetText)));
+        }
+        if (via) {
+          params.push("via=" + (encodeURIComponent(via)));
+        }
+        if (related) {
+          params.push("related=" + (encodeURIComponent(related)));
+        }
+        this._url = "https://twitter.com/share?" + params.join("&");
+        if (o.tweakHref) {
+          return this.$el.attr('href', this._url);
+        }
+      };
+
+      Button.prototype._handleAttr = function(key) {
+        var prop, val;
+        prop = key.replace(/^data-twittershare-/, '');
+        val = this.$el.attr(key);
+        if (!val) {
+          return;
+        }
+        return this.options[prop] = val;
+      };
+
+      Button.prototype._handleDataAttrs = function() {
+        this._handleAttr('data-twittershare-windowname');
+        this._handleAttr('data-twittershare-width');
+        this._handleAttr('data-twittershare-height');
+        this._handleAttr('data-twittershare-text');
+        this._handleAttr('data-twittershare-url');
+        this._handleAttr('data-twittershare-via');
+        return this._handleAttr('data-twittershare-related');
+      };
+
+      Button.prototype._eventify = function() {
+        var _this = this;
+        return this.$el.click(function(e) {
+          e.preventDefault();
+          return _this.open();
+        });
+      };
+
+      return Button;
+
+    })();
+    $.fn.twitterShareButton = function(options) {
+      var key;
+      key = 'twittersharebutton';
+      return this.each(function(i, el) {
+        var $el, instance;
+        $el = $(el);
+        instance = new ns.twitterShareButton.Button($el, options);
+        if ($el.data(key)) {
+          return;
+        }
+        return $el.data(key, instance);
+      });
     };
     ns.gplus = {};
     ns.gplus.options = {
