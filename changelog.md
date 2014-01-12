@@ -1,5 +1,9 @@
 # Change log
 
+## v0.1.6
+
+* [@GeckoTang](https://twitter.com/GeckoTang) implemented twitterShare feature. Thanks.
+
 ## v0.1.5
 
 * Fixed: facebook share button did not get url val from DOM
