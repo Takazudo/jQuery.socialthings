@@ -1,5 +1,5 @@
 /*! jQuery.socialthings (https://github.com/Takazudo/jQuery.socialthings)
- * lastupdate: 2014-01-12
+ * lastupdate: 2014-01-15
  * version: 0.1.6
  * author: 'Takazudo' Takeshi Takatsudo <takazudo@gmail.com>
  * License: MIT */
@@ -368,7 +368,7 @@
         var p, src;
         p = (/^http:/.test(document.location) ? "http" : "https");
         src = p + '://media.line.naver.jp/js/line-button.js?v=20130508';
-        document.write("<script src='" + src + "'></script>");
+        document.write(("<script src='" + src + "'></") + "script>");
         loaded = true;
       };
       return function() {

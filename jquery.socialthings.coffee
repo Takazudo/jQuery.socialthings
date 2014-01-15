@@ -310,7 +310,7 @@ do ($ = jQuery) ->
     init = ->
       p = (if /^http:/.test(document.location) then "http" else "https")
       src = p + '://media.line.naver.jp/js/line-button.js?v=20130508'
-      document.write "<script src='#{src}'></script>"
+      document.write "<script src='#{src}'></" + "script>"
       loaded = true
       return
 
