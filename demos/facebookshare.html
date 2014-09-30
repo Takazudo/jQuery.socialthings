@@ -24,41 +24,40 @@
 
 $(function() {
 
-	var options = {
-		width: 626,
-		height: 436,
-		html: 'share me!'
-	};
+	// load fb first. All buttons on the page will be created.
+	// normally, this is enough.
+	$.socialthings.facebook.loadJS();
 
-	$('.sharetest').facebookShareButton(options);
-
+	// extra button test.
+	// apply `initFacebookThings` to create buttons against dynamically added DOM.
 	var $extraButtons = $('#extraButtons');
 	$('#addExtra').click(function() {
 		var src = $.trim($(document.getElementById('fbsharebuttonsrc')).html()); // get src
 		var $newButton = $(src); // span wrap 
 		$extraButtons.append($newButton); // then add,
-		$newButton.facebookShareButton(options);
+		$newButton.initFacebookThings(); // and apply facebook button
 	});
 
 });
 
 </script>
 <script type="text/x-htmlsrc" id="fbsharebuttonsrc">
-<a href="#" class="sharetest"></a>
+<div>
+	<div
+		class="fb-share-button"
+		data-href="http://developers.facebook.com/docs/plugins/"
+		data-type="button_count"
+	></div>
+</div>
 </script>
 </head>
 <body>
 
-<a href="#" class="sharetest">hoge</a>
-
-<a
-	href="#"
-	class="sharetest"
-	data-facebookshare-windowname="customwindowname"
-	data-facebookshare-width="400"
-	data-facebookshare-height="300"
-	data-facebookshare-url="http://example.com"
-></a>
+<div
+	class="fb-share-button"
+	data-href="http://developers.facebook.com/docs/plugins/"
+	data-type="button_count"
+></div>
 
 <div id="extraButtonTest">
 	<div id="extraButtonTestController">

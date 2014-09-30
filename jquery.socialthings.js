@@ -1,5 +1,5 @@
 /*! jQuery.socialthings (https://github.com/Takazudo/jQuery.socialthings)
- * lastupdate: 2014-01-15
+ * lastupdate: 2014-10-01
  * version: 0.1.6
  * author: 'Takazudo' Takeshi Takatsudo <takazudo@gmail.com>
  * License: MIT */
@@ -50,96 +50,6 @@
         if (!ns.facebook.loadJS()) {
           return window.FB.XFBML.parse(el);
         }
-      });
-    };
-    ns.facebookShareButton = {};
-    ns.facebookShareButton.Button = (function() {
-
-      Button.defaults = {
-        windowname: 'facebook-share-dialog',
-        width: null,
-        height: null,
-        url: null,
-        html: null,
-        tweakHref: true
-      };
-
-      function Button($el, options) {
-        this.$el = $el;
-        this.options = $.extend({}, ns.facebookShareButton.Button.defaults, options);
-        this._tweakInsideHtml();
-        this._handleDataAttrs();
-        this._prepareUrl();
-        this._eventify();
-      }
-
-      Button.prototype.open = function() {
-        var args, name, o;
-        o = this.options;
-        name = o.windowname;
-        args = [this._url, name];
-        if ((o.width != null) && (o.height != null)) {
-          args.push("width=" + o.width + ",height=" + o.height);
-        }
-        return window.open.apply(window, args);
-      };
-
-      Button.prototype._tweakInsideHtml = function() {
-        if (this.options.html == null) {
-          return;
-        }
-        return this.$el.html(this.options.html);
-      };
-
-      Button.prototype._prepareUrl = function() {
-        var o, shareUrl;
-        o = this.options;
-        shareUrl = o.url || location.href;
-        this._url = "https://www.facebook.com/sharer/sharer.php?u=" + (encodeURIComponent(shareUrl));
-        if (o.tweakHref) {
-          return this.$el.attr('href', this._url);
-        }
-      };
-
-      Button.prototype._handleAttr = function(key) {
-        var prop, val;
-        prop = key.replace(/^data-facebookshare-/, '');
-        val = this.$el.attr(key);
-        if (!val) {
-          return;
-        }
-        return this.options[prop] = val;
-      };
-
-      Button.prototype._handleDataAttrs = function() {
-        this._handleAttr('data-facebookshare-windowname');
-        this._handleAttr('data-facebookshare-width');
-        this._handleAttr('data-facebookshare-height');
-        return this._handleAttr('data-facebookshare-url');
-      };
-
-      Button.prototype._eventify = function() {
-        var _this = this;
-        return this.$el.click(function(e) {
-          e.preventDefault();
-          return _this.open();
-        });
-      };
-
-      return Button;
-
-    })();
-    $.fn.facebookShareButton = function(options) {
-      var key;
-      key = 'facebooksharebutton';
-      return this.each(function(i, el) {
-        var $el, instance;
-        $el = $(el);
-        instance = new ns.facebookShareButton.Button($el, options);
-        if ($el.data(key)) {
-          return;
-        }
-        return $el.data(key, instance);
       });
     };
     ns.twitter = {};
