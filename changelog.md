@@ -1,5 +1,9 @@
 # Change log
 
+## v0.1.7
+
+* removed old facebook share button
+
 ## v0.1.6
 
 * [@GeckoTang](https://twitter.com/GeckoTang) implemented twitterShare feature. Thanks.
