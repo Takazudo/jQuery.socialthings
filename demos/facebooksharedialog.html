@@ -1,0 +1,73 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8">
+<title></title>
+<meta name="viewport" content="width=device-width">
+<style>
+.sharetest {
+	border:3px solid red;
+	display:inline-block;
+	margin:0 4px 4px 0;
+}
+#extraButtonTest {
+	border:2px solid black;
+	padding:10px;
+}
+	#extraButtonTestController {
+		padding:0 0 8px;
+	}
+</style>
+<script src="../libs/jquery/1.9.1/jquery.js"></script>
+<script src="../jquery.socialthings.js"></script>
+<script>
+
+$(function() {
+
+	var options = {
+		width: 626,
+		height: 436,
+		html: 'share me!'
+	};
+
+	$('.sharetest').facebookShareButton(options);
+
+	var $extraButtons = $('#extraButtons');
+	$('#addExtra').click(function() {
+		var src = $.trim($(document.getElementById('fbsharebuttonsrc')).html()); // get src
+		var $newButton = $(src); // span wrap 
+		$extraButtons.append($newButton); // then add,
+		$newButton.facebookShareButton(options);
+	});
+
+});
+
+</script>
+<script type="text/x-htmlsrc" id="fbsharebuttonsrc">
+<a href="#" class="sharetest"></a>
+</script>
+</head>
+<body>
+
+<a href="#" class="sharetest"></a>
+
+<a
+	href="#"
+	class="sharetest"
+	data-facebookshare-windowname="customwindowname"
+	data-facebookshare-width="400"
+	data-facebookshare-height="300"
+	data-facebookshare-url="http://example.com"
+></a>
+
+<div id="extraButtonTest">
+	<div id="extraButtonTestController">
+		<button id="addExtra">add extra button here</button>
+	</div>
+	<div id="extraButtons">
+	</div>
+</div>
+
+
+</body>
+</html>

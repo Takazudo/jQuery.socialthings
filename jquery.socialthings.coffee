@@ -42,6 +42,73 @@ do ($ = jQuery) ->
         window.FB.XFBML.parse el
 
   # ============================================================
+  # facebook share button
+
+  ns.facebookShareButton = {}
+
+  class ns.facebookShareButton.Button
+
+    @defaults =
+      windowname: 'facebook-share-dialog'
+      width: null
+      height: null
+      url: null
+      html: null
+      tweakHref: true
+
+    constructor: (@$el, options) ->
+      @options = $.extend {}, ns.facebookShareButton.Button.defaults, options
+      @_tweakInsideHtml()
+      @_handleDataAttrs()
+      @_prepareUrl()
+      @_eventify()
+
+    open: ->
+      o = @options
+      name = o.windowname
+      args = [@_url, name]
+      if o.width? and o.height?
+        args.push "width=#{o.width},height=#{o.height}"
+      window.open.apply window, args
+
+    _tweakInsideHtml: ->
+      return unless @options.html?
+      @$el.html @options.html
+
+    _prepareUrl: ->
+      o = @options
+      shareUrl = o.url or location.href
+      @_url = "https://www.facebook.com/sharer/sharer.php?u=#{encodeURIComponent(shareUrl)}"
+      if o.tweakHref
+        @$el.attr 'href', @_url
+
+    _handleAttr: (key) ->
+      prop = key.replace /^data-facebookshare-/, ''
+      val = @$el.attr key
+      return unless val
+      @options[prop] = val
+
+    _handleDataAttrs: ->
+      @_handleAttr 'data-facebookshare-windowname'
+      @_handleAttr 'data-facebookshare-width'
+      @_handleAttr 'data-facebookshare-height'
+      @_handleAttr 'data-facebookshare-url'
+
+    _eventify: ->
+      @$el.click (e) =>
+        e.preventDefault()
+        @open()
+
+  $.fn.facebookShareButton = (options) ->
+    key = 'facebooksharebutton'
+    return @each (i, el) ->
+      $el = $(el)
+      instance = new ns.facebookShareButton.Button $el, options
+      if $el.data key
+        return
+      $el.data key, instance
+
+  # ============================================================
   # twitter
   
   ns.twitter = {}

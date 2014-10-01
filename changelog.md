@@ -1,5 +1,9 @@
 # Change log
 
+## v0.1.8
+
+* added facebook share dialog
+
 ## v0.1.7
 
 * removed old facebook share button
