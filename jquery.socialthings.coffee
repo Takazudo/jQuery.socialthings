@@ -35,11 +35,37 @@ do ($ = jQuery) ->
       return false if loaded
       init()
       return true
+  
+  # to run like button initialization, we need to wait for
+  # FB object which will be prepared via facebook JavaScript.
+  
+  ns.facebook.waitForPreparation = do ->
+  
+    interval = 250
+    promise = null
+    
+    runCheck = ->
+      promise = $.Deferred (defer) ->
+        check = ->
+          if window.FB?.XFBML?
+            defer.resolve()
+          else
+            setTimeout check, interval
+        check()
+      .promise()
+    
+    return ->
+      unless promise
+        runCheck()
+      return promise
+      
+  # bridge to plugin
 
   $.fn.initFacebookThings = (options) ->
     return @each (i, el) ->
       unless ns.facebook.loadJS()
-        window.FB.XFBML.parse el
+        ns.facebook.waitForPreparation().done ->
+          window.FB.XFBML.parse el
 
   # ============================================================
   # facebook share button

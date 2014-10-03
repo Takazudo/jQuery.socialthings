@@ -1,5 +1,5 @@
 /*! jQuery.socialthings (https://github.com/Takazudo/jQuery.socialthings)
- * lastupdate: 2014-10-01
+ * lastupdate: 2014-10-03
  * version: 0.1.8
  * author: 'Takazudo' Takeshi Takatsudo <takazudo@gmail.com>
  * License: MIT */
@@ -45,10 +45,37 @@
         return true;
       };
     })();
+    ns.facebook.waitForPreparation = (function() {
+      var interval, promise, runCheck;
+      interval = 250;
+      promise = null;
+      runCheck = function() {
+        return promise = $.Deferred(function(defer) {
+          var check;
+          check = function() {
+            var _ref;
+            if (((_ref = window.FB) != null ? _ref.XFBML : void 0) != null) {
+              return defer.resolve();
+            } else {
+              return setTimeout(check, interval);
+            }
+          };
+          return check();
+        }).promise();
+      };
+      return function() {
+        if (!promise) {
+          runCheck();
+        }
+        return promise;
+      };
+    })();
     $.fn.initFacebookThings = function(options) {
       return this.each(function(i, el) {
         if (!ns.facebook.loadJS()) {
-          return window.FB.XFBML.parse(el);
+          return ns.facebook.waitForPreparation().done(function() {
+            return window.FB.XFBML.parse(el);
+          });
         }
       });
     };
