@@ -2,6 +2,10 @@
 
 ## v0.1.8
 
+* fixed: the 2nd call of twitter initialization was failed when twitter script loading was not finished
+
+## v0.1.8
+
 * added facebook share dialog
 
 ## v0.1.7
