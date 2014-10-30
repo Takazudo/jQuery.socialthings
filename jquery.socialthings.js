@@ -1,5 +1,5 @@
 /*! jQuery.socialthings (https://github.com/Takazudo/jQuery.socialthings)
- * lastupdate: 2014-10-03
+ * lastupdate: 2014-10-30
  * version: 0.1.8
  * author: 'Takazudo' Takeshi Takatsudo <takazudo@gmail.com>
  * License: MIT */
@@ -195,9 +195,36 @@
         return true;
       };
     })();
+    ns.twitter.waitForPreparation = (function() {
+      var interval, promise, runCheck;
+      interval = 250;
+      promise = null;
+      runCheck = function() {
+        return promise = $.Deferred(function(defer) {
+          var check;
+          check = function() {
+            var _ref, _ref1;
+            if (((_ref = window.twttr) != null ? (_ref1 = _ref.widgets) != null ? _ref1.load : void 0 : void 0) != null) {
+              return defer.resolve();
+            } else {
+              return setTimeout(check, interval);
+            }
+          };
+          return check();
+        }).promise();
+      };
+      return function() {
+        if (!promise) {
+          runCheck();
+        }
+        return promise;
+      };
+    })();
     ns.twitter.applyWidgets = function() {
       if (!ns.twitter.loadJS()) {
-        window.twttr.widgets.load();
+        ns.twitter.waitForPreparation().done(function() {
+          return window.twttr.widgets.load();
+        });
       }
     };
     ns.twitterShareButton = {};

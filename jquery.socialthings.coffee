@@ -159,11 +159,37 @@ do ($ = jQuery) ->
       return false if loaded
       init()
       return true
-
+      
+  # to run twitter button initialization, we need to wait for
+  # twttr object which will be prepared via twitter JavaScript.
+  
+  ns.twitter.waitForPreparation = do ->
+  
+    interval = 250
+    promise = null
+    
+    runCheck = ->
+      promise = $.Deferred (defer) ->
+        check = ->
+          if window.twttr?.widgets?.load?
+            defer.resolve()
+          else
+            setTimeout check, interval
+        check()
+      .promise()
+    
+    return ->
+      unless promise
+        runCheck()
+      return promise
+      
+  # API
+  
   ns.twitter.applyWidgets = ->
     unless ns.twitter.loadJS()
       # https://dev.twitter.com/discussions/6860
-      window.twttr.widgets.load()
+      ns.twitter.waitForPreparation().done ->
+        window.twttr.widgets.load()
     return
 
   # ============================================================
