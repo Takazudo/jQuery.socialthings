@@ -1,5 +1,14 @@
 # Change log
 
+## v0.1.10
+
+* updated facebook script to the new one
+
+## v0.1.9
+
+* fixed: the 2nd call of twitter initialization was failed when twitter script loading was not finished
+* fixed: facebook like button initialization was failed when there was no FB object in window yet.
+
 ## v0.1.8
 
 * fixed: the 2nd call of twitter initialization was failed when twitter script loading was not finished
