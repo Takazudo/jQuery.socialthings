@@ -1,5 +1,5 @@
 /*! jQuery.socialthings (https://github.com/Takazudo/jQuery.socialthings)
- * lastupdate: 2014-10-30
+ * lastupdate: 2014-11-11
  * version: 0.1.9
  * author: 'Takazudo' Takeshi Takatsudo <takazudo@gmail.com>
  * License: MIT */
@@ -20,7 +20,7 @@
         var o, src;
         $('body').append('<div id="fb-root"></div>');
         o = ns.facebook.options;
-        src = "//connect.facebook.net/" + o.locale + "/all.js#xfbml=1";
+        src = "//connect.facebook.net/" + o.locale + "/sdk.js#xfbml=1&version=v2.0";
         if (o.appId) {
           src += "&appId=" + o.appId;
         }

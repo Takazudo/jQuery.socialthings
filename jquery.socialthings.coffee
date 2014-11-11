@@ -18,7 +18,7 @@ do ($ = jQuery) ->
     init = ->
       $('body').append '<div id="fb-root"></div>'
       o = ns.facebook.options
-      src = "//connect.facebook.net/#{o.locale}/all.js#xfbml=1"
+      src = "//connect.facebook.net/#{o.locale}/sdk.js#xfbml=1&version=v2.0"
       if o.appId
         src += "&appId=#{o.appId}"
       do (d = document, s = 'script', id = 'facebook-jssdk') ->
